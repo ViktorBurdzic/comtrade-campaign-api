@@ -1,0 +1,51 @@
+### Customer Service Campaign API — sample requests
+@baseUrl = https://localhost:7227
+
+### 1. Get a bearer token
+# @name token
+POST {{baseUrl}}/api/v1/auth/token
+Content-Type: application/json
+
+{
+  "clientId": "crm-demo",
+  "clientSecret": "crm-demo-secret"
+}
+
+### 2. Look a customer up in the external SOAP directory
+GET {{baseUrl}}/api/v1/customers/1
+Authorization: Bearer {{token.response.body.accessToken}}
+
+### 3. Create a reward (the agent's form)
+POST {{baseUrl}}/api/v1/rewards
+Authorization: Bearer {{token.response.body.accessToken}}
+Content-Type: application/json
+
+{
+  "agentUsername": "viktor",
+  "customerId": 1,
+  "discountPercent": 15
+}
+
+### 4. List rewards
+GET {{baseUrl}}/api/v1/rewards?agentUsername=viktor
+Authorization: Bearer {{token.response.body.accessToken}}
+
+### 5. Correct a mistake (replace {id})
+PUT {{baseUrl}}/api/v1/rewards/{id}
+Authorization: Bearer {{token.response.body.accessToken}}
+Content-Type: application/json
+
+{
+  "discountPercent": 25
+}
+
+### 6. Remove a mistaken entry (replace {id})
+DELETE {{baseUrl}}/api/v1/rewards/{id}
+Authorization: Bearer {{token.response.body.accessToken}}
+
+### 7. Import the monthly purchase report (use Swagger UI for the file upload)
+### samples/purchases-sample.csv
+
+### 8. Campaign results (the merged report)
+GET {{baseUrl}}/api/v1/reports/campaign-results
+Authorization: Bearer {{token.response.body.accessToken}}

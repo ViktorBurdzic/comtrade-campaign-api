@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
-using Campaign.Application.Reports;
+﻿using Campaign.Application.Reports;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Campaign.Api.Controllers;
