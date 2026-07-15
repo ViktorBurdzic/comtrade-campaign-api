@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Campaign.Application.Purchases;
 using Campaign.Application.Rewards;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection
+    using Campaign.Application.Reports;
 
 namespace Campaign.Application;
 
