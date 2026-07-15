@@ -5,6 +5,8 @@ using Campaign.Infrastructure.Soap;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Campaign.Application.Purchases;
+using Campaign.Infrastructure.Csv;
 
 namespace Campaign.Infrastructure;
 
@@ -14,6 +16,7 @@ public static class DependencyInjection
     {
         services.AddDbContext<CampaignDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Default")));
+        services.AddScoped<IPurchaseCsvParser, PurchaseCsvParser>();
 
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<CampaignDbContext>());
 
