@@ -1,9 +1,13 @@
 ﻿using Campaign.Application.Rewards;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
+
 
 namespace Campaign.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/v1/rewards")]
 public sealed class RewardsController : ControllerBase
 {

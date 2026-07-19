@@ -1,10 +1,12 @@
 ﻿using Campaign.Application.Common;
 using Campaign.Application.Customers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Campaign.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/v1/customers")]
 public sealed class CustomersController : ControllerBase
 {

@@ -1,10 +1,11 @@
 ﻿using Campaign.Application.Common;
 using Campaign.Application.Purchases;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
 namespace Campaign.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/v1/purchases")]
 public sealed class PurchasesController : ControllerBase
 {

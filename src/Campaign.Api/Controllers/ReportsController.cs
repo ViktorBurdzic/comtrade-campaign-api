@@ -1,9 +1,11 @@
 ﻿using Campaign.Application.Reports;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Campaign.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/v1/reports")]
 public sealed class ReportsController : ControllerBase
 {

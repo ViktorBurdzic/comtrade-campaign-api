@@ -34,19 +34,16 @@ public sealed class RewardService : IRewardService
         var agent = request.AgentUsername.Trim();
         var rewardDate = request.RewardDate ?? DateOnly.FromDateTime(DateTime.UtcNow);
 
-        // customer must exist in the external directory
         var customer = await _customers.FindPersonAsync(request.CustomerId, ct)
             ?? throw new NotFoundException(
                 $"Customer with id {request.CustomerId} was not found in the customer directory.");
 
-        // daily limit; soft-deleted rows are excluded by the global query filter
         var activeToday = await _db.Rewards
             .CountAsync(r => r.AgentUsername == agent && r.RewardDate == rewardDate, ct);
 
         if (activeToday >= DailyLimitPerAgent)
             throw new DailyLimitExceededException(agent, rewardDate, DailyLimitPerAgent);
 
-        // no duplicate customer per agent per day (also guarded by a unique index)
         var alreadyRewarded = await _db.Rewards.AnyAsync(
             r => r.AgentUsername == agent &&
                  r.CustomerId == request.CustomerId &&
